@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        ul{
+            position: relative;
+            width: 600px;
+            height: 80px;
+            margin: 100px auto 0;
+        }
+        ul li.nav{
+            width: 148px;
+            height: 78px;
+            border: 1px solid black;
+            color:  #f00;
+            text-align: center;
+            line-height: 78px;
+            float: left;
+        }
+        ul .bg{
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            background: #f40;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="nav">ES6</li>
+        <li class="nav">Node</li>
+        <li class="nav">Vue.js</li>
+        <li class="nav">Webpack</li>
+        <li class="bg"></li>
+    </ul>
+    <script>
+        var oLiArray = Array.prototype.slice.call(document.getElementsByClassName('nav'), 0);
+        var oBg =document.getElementsByClassName('bg')[0];
+        oLiArray.forEach(function(ele, index){
+            ele.onmouseenter = function(){
+                var newLeft = this.offsetLeft;
+                startMove(oBg, newLeft);
+            }
+        })
+        function startMove(obj, target){
+            clearInterval(obj.timer);
+            var iSpeed = 40;
+            var a, u = 0.8;// u is fiction
+            obj.timer = setInterval(function(){
+                a = (target - obj.offsetLeft)/15;
+                iSpeed = iSpeed + a;
+                iSpeed = iSpeed * u;
+                if(Math.abs(iSpeed) <= 1 && Math.abs(target - obj.offsetLeft) <= 1){
+                    clearInterval(obj.timer);
+                    obj.style.Left = target;
+                }else{
+                    obj.style.left = obj.offsetLeft + iSpeed + 'px'; 
+                }
+            }, 30);
+        }
+        // function startMove(obj){
+        //     clearInterval(obj.timer);
+        //     var iSpeed =40;
+        //     var a = -3 ;//acceleration
+        //     obj.timer = setInterval( function(){
+        //         iSpeed = iSpeed + a;
+        //         obj.style.left = obj.offsetLeft + iSpeed +'px';
+        //     }, 30)
+        // }
+    </script>
+</body>
+</html>

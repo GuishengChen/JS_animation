@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        height: 100px;
+        width: 100px;
+        background: orange;
+        margin-top:20px;
+        border: 1px solid black;
+        opacity: 1;
+    }
+    </style>
+</head>
+<body>
+    <div class="div"></div>
+    <div class="div"></div>
+    <div class="div"></div>
+    <div class="div"></div>
+    <script>
+        var oDivArray = document.getElementsByTagName('div');
+        var timer =null;
+        // for(var i=0; i < oDivArray.length; i++){
+        //     oDivArray[i].onmouseenter = function (){
+        //         startMove(this, 400);
+        //     }
+        //     oDivArray[i].onmouseleave = function (){
+        //         startMove(this, 100);
+        //     }
+        // }
+        oDivArray[0].onclick = function(){
+            startMove(this, 400, 'width');
+        }
+        oDivArray[1].onclick = function(){
+            startMove(this, 400, 'height');
+        }
+        oDivArray[2].onclick = function(){
+            startMove(this, 50, 'opacity');
+        }
+        oDivArray[3].onclick = function(){
+            startMove(this, 50, 'borderWidth');
+        }
+          function startMove(obj, target, attr){
+            clearInterval(obj.timer);
+            var iSpeed;
+            obj.timer = setInterval(function(){
+                if(attr=='opacity'){
+                        iCur = parseFloat(getStyle(obj, attr))*100;
+                }else{
+                    iCur=parseInt(getStyle(obj, attr));
+                }
+                iSpeed = (target-iCur)/7;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                if(iCur === target){
+                    clearInterval(obj.timer);
+                }else{
+                    if(attr =='opacity'){
+                        obj.style.opacity = (iCur + iSpeed) /100;
+                    }else{
+                        obj.style[attr] = iCur + iSpeed +'px';
+                    }
+                }
+            }, 30);
+        }
+
+        function getStyle(obj, attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }else{
+                return window.getComputedStyle(obj, false)[attr];
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cool slider using jquery</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wrapper{
+    margin: 100px auto;
+    width: 1020px;
+    height: 200px;
+}
+.title{
+    width:100px;
+    height: 200px; 
+    background: url("title.png");
+    float: left;
+    border: 1px solid black;
+}
+.content{
+    background: url("content.jpg");
+    float: left;
+    width:0px;
+    height: 200px;
+}
+li{
+    float: left;
+}
+ul li:first-child .content{
+    width: 500px;
+    height: 200px;
+}
+</style>
+<body>
+    <div class="wrapper">
+        <ul class="ul-wrapper">
+            <li class="li-wrapper">
+                <div class="title"></div>
+                <div class="content"></div>
+            </li>
+            <li class="li-wrapper">
+                <div class="title"></div>
+                <div class="content"></div>
+            </li>
+            <li class="li-wrapper">
+                <div class="title"></div>
+                <div class="content"></div>
+            </li>
+            <li class="li-wrapper">
+                <div class="title"></div>
+                <div class="content"></div>
+            </li>
+            <li class="li-wrapper">
+                <div class="title"></div>
+                <div class="content"></div>
+            </li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+       
+            $(".li-wrapper").mouseenter(function(){
+                //using stop to cancel ongoing animation 
+                $(this).children(".content").stop().animate({width:500});
+                $(this).siblings().children(".content").stop().animate({width:0});
+            })
+    
+    </script>
+</body>
+</html>
